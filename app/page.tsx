@@ -73,7 +73,7 @@ export default function Home() {
               onClick={() => setLang(lang === "en" ? "ja" : "en")}
               className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
             >
-              {lang === "en" ? "JP" : "EN"}
+              {lang === "en" ? "日本語" : "ENGLISH"}
             </button>
             <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-5 py-2 rounded-md hover:bg-white hover:text-black transition-all">
               Discord

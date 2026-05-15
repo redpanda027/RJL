@@ -47,7 +47,7 @@ const navLinksKeys = [
   { labelKey: "home", href: "/" },
   { labelKey: "members", href: "/members", active: true },
   { labelKey: "events", href: "/events" },
-  { labelKey: "partners", href: "/partners" },
+  { labelKey: "about", href: "/about" },
 ];
 
 export default function MembersPage() {
