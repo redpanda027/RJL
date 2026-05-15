@@ -8,7 +8,7 @@ export default function Home() {
   const t = {
     en: {
       badge: "Virtual Trucking Company · ETS2",
-      subtitle: "Freedom Across Asia",
+      subtitle: "No pressure. No limits. drive anytime together.",
       joinUs: "Join Us",
       aboutLabel: "About us",
       whyJoin: "Why Join RJL?",
@@ -27,7 +27,7 @@ export default function Home() {
     },
     ja: {
       badge: "バーチャルトラッキング会社 · ETS2",
-      subtitle: "アジアを自由に",
+      subtitle: "自由に、みんないつでも一緒に走ろう。",
       joinUs: "参加する",
       aboutLabel: "私たちについて",
       whyJoin: "なぜRJLに？",

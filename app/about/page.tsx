@@ -16,10 +16,11 @@ export default function AboutUs() {
             whoWeAre: "Who We Are",
             aboutTitle: "About Us",
             welcomeTitle: "Welcome to Royal Jiyū Logistics.",
-            intro: "We are a TruckersMP VTC mainly focused on the Asian community. Our goal is simple: enjoy the road freely and casually together.",
-            convoyInfo: "We sometimes organize convoy events, but participation is always optional. There is no pressure to join every event or stay active all the time.",
+            intro: "We are a TruckersMP VTC mainly focused on the Asian community, built for drivers who want to enjoy the road in a relaxed, friendly, and pressure-free environment. Our goal is simple: enjoy TruckersMP freely and casually together.",
+            convoyInfo: "At Royal Jiyū Logistics, we believe that TruckersMP does not always need to feel competitive or overly serious. Sometimes the best moments come from quiet night drives, random conversations on the road, or suddenly deciding to travel across the map together with other drivers. We want to create a community where people can freely enjoy those moments without feeling forced to participate in everything.",
             motto: "Drive when you want. Join others when you feel like it.",
             communityDesc: "That is the kind of relaxed community we want to create. No matter where you are driving on the map, you are always welcome to say:",
+            convoyInfo2: "We sometimes organize convoy events and community activities, but participation is always optional. There is no pressure to join every event, stay constantly active, or follow strict attendance requirements. Everyone has their own pace, and we respect that.",
             quote1: "\"I'm driving here right now.\"",
             quote2: "\"Anyone nearby wants to join?\"",
             interaction: "We value casual and natural interaction between members.",
@@ -37,23 +38,56 @@ export default function AboutUs() {
             members: "メンバー",
             events: "イベント",
             discord: "Discord",
+
             whoWeAre: "私たちについて",
             aboutTitle: "私たちについて",
-            welcomeTitle: "ロイヤルジユーロジスティクスへようこそ。",
-            intro: "私たちはアジアコミュニティを中心に活動するTruckersMP VTCです。目標は単純明快：気軽に、自由に一緒に走ること。",
-            convoyInfo: "時々コンボイイベントを開催していますが、参加は常にオプションです。毎回参加する必要もなく、常にアクティブである必要もありません。",
+
+            welcomeTitle: "ようこそ、Royal Jiyū Logisticsへ。",
+
+            intro: "私たちは、アジア圏を中心に活動しているTruckersMPのVTCです。このVTCでは、「自由に楽しむこと」を何より大切にしています。",
+
+            intro2: "TruckersMPには、いろいろな楽しみ方があります。大人数で走るconvoy、静かな夜道をのんびり走る時間、VCで雑談しながらの配送、景色を楽しむ長距離ドライブ――Royal Jiyū Logisticsは、そんな自由な楽しみ方を共有できるコミュニティです。",
+
+            convoyInfo: "私たちは時々convoyイベントやコミュニティ活動を開催していますが、参加は完全自由です。毎回イベントに参加したり、常に活動したりする必要はありません。",
+
+            convoyInfo2: "毎日走る人も、たまに気分転換でログインする人も、自分のペースで楽しめる場所を目指しています。",
+
             motto: "行きたい時に走る。誰かと走りたい時に集まる。",
-            communityDesc: "そんなリラックスしたコミュニティを作りたいんです。マップのどこを走っていても、こんなふうに声をかけてもらえます：",
-            quote1: "「今ここ走ってます！」",
-            quote2: "「近い人、一緒に走りませんか？」",
-            interaction: "メンバー間の自然で気軽な交流を大切にしています。",
-            waysTitle: "TruckersMP の楽しみ方はたくさんあります：",
-            ways: ["のんびりドライブ", "長距離配送", "夜間走行", "写真撮影", "チャットしながらドライブ"],
-            closing: "初心者さん、経験者さん、ソロプレイ派さん、みんなウェルカムです。気軽に参加して、一緒に走ろう。圧はかかりません。",
+
+            communityDesc: "そんな気軽で自然なコミュニティを目指しています。マップのどこを走っていても、自由に声をかけ合える雰囲気を大切にしています。",
+
+            quote1: "「今ここを走ってる！」",
+            quote2: "「近い人、一緒に行こう！」",
+            quote3: "「今夜長距離やる人いる？」",
+
+            interaction: "無理に活動する必要はありません。ふと誰かと一緒に走りたくなった時に、気軽に集まれる。そんな関係を大切にしています。",
+
+            waysTitle: "また、convoyだけではなく、",
+
+            ways: [
+                "のんびりドライブ",
+                "長距離配送",
+                "夜間走行",
+                "写真撮影",
+                "雑談しながらの運転",
+                "景色を楽しむクルージング",
+                "ソロで気ままに走行",
+                "リアル志向の運転"
+            ],
+
+            closing: "初心者でも、経験者でも、ソロ勢でも大歓迎。自由に参加して、気軽に楽しめる場所です。",
+
+            closing2: "Royal Jiyū Logisticsの「Jiyū」は、“自由”という意味です。ルールやプレッシャーに縛られすぎず、それぞれのスタイルでTruckersMPを楽しめるコミュニティを目指しています。",
+
+            closing3: "一緒に楽しいコミュニティを作っていきましょう！",
+
             readyTitle: "さあ、走ろう！",
-            ctaSub: "Discordに参加して、最初の一歩を踏み出そう。",
+
+            ctaSub: "Discordに参加して、新しい仲間と一緒に走り出そう。",
+
             joinDiscord: "Discordに参加",
-            footer: "© 2026 Royal Jiyu Logistics · 自由はアジア中に。",
+
+            footer: "© 2026 Royal Jiyū Logistics · 自由に、気軽に、一緒に。"
         }
     }[lang];
 
