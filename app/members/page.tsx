@@ -24,7 +24,7 @@ const ranks = [
     color: "#60a5fa",
     bg: "rgba(96,165,250,0.12)",
     members: [
-      { initials: "FK", name: "Arigasaki05", role: "Driver", deliveries: 0 },
+      { initials: "FK", name: "Arigasaki0", role: "Driver", deliveries: 0 },
       { initials: "DR", name: "Driver2", role: "Driver", deliveries: 45 },
       { initials: "DR", name: "Driver3", role: "Driver", deliveries: 32 },
     ],
