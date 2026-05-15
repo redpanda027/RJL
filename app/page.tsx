@@ -23,9 +23,9 @@ export default function Home() {
           <ul className="flex items-center gap-9 list-none">
             {[
               { label: "Home", href: "/", active: true },
+              { label: "About us", href: "/about", active: false },
               { label: "Members", href: "/members", active: false },
               { label: "Events", href: "/events", active: false },
-              { label: "Partners", href: "/partners", active: false },
             ].map(({ label, href, active }) => (
               <li key={label}>
                 <Link href={href}
@@ -195,3 +195,8 @@ export default function Home() {
     </main >
   );
 }
+
+{/*npm run build
+git add .
+git commit -m "update"
+git push*/}
