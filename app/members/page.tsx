@@ -1,52 +1,57 @@
+'use client';
+
 import Link from "next/link";
+import { useLanguage } from "@/app/context/LanguageContext";
+import { LanguageSwitcher } from "@/app/components/LanguageSwitcher";
 
 const ranks = [
   {
-    label: "Adminstration",
+    labelKey: "administration",
     color: "#f97316",
     bg: "rgba(249,115,22,0.12)",
     members: [
-      { initials: "RP", name: "Redpanda026", role: "Owner", deliveries: null },
-      { initials: "LG", name: "Loyal Gaming", role: "Co-Owner", deliveries: null },
+      { initials: "RP", name: "Redpanda026", roleKey: "owner", deliveries: null },
+      { initials: "LG", name: "Loyal Gaming", roleKey: "co-owner", deliveries: null },
     ],
   },
   {
-    label: "Staff",
+    labelKey: "staff",
     color: "#a78bfa",
     bg: "rgba(167,139,250,0.12)",
     members: [
-      { initials: "SR", name: "SeniorDriver1", role: "Senior Driver", deliveries: 250 },
-      { initials: "SR", name: "SeniorDriver2", role: "Senior Driver", deliveries: 180 },
+      { initials: "SR", name: "SeniorDriver1", roleKey: "senior-driver", deliveries: 250 },
+      { initials: "SR", name: "SeniorDriver2", roleKey: "senior-driver", deliveries: 180 },
     ],
   },
   {
-    label: "Drivers",
+    labelKey: "drivers",
     color: "#60a5fa",
     bg: "rgba(96,165,250,0.12)",
     members: [
-      { initials: "FK", name: "Arigasaki0", role: "Driver", deliveries: 0 },
-      { initials: "DR", name: "Driver2", role: "Driver", deliveries: 45 },
-      { initials: "DR", name: "Driver3", role: "Driver", deliveries: 32 },
+      { initials: "FK", name: "Arigasaki0", roleKey: "driver", deliveries: 0 },
+      { initials: "DR", name: "Driver2", roleKey: "driver", deliveries: 45 },
+      { initials: "DR", name: "Driver3", roleKey: "driver", deliveries: 32 },
     ],
   },
   {
-    label: "Chats",
+    labelKey: "chats",
     color: "rgba(255,255,255,0.4)",
     bg: "rgba(255,255,255,0.07)",
     members: [
-      { initials: "RC", name: "Recruit1", role: "Recruit", deliveries: 5 },
+      { initials: "RC", name: "Recruit1", roleKey: "recruit", deliveries: 5 },
     ],
   },
 ];
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Members", href: "/members", active: true },
-  { label: "Events", href: "/events" },
-  { label: "Partners", href: "/partners" },
+const navLinksKeys = [
+  { labelKey: "home", href: "/" },
+  { labelKey: "members", href: "/members", active: true },
+  { labelKey: "events", href: "/events" },
+  { labelKey: "partners", href: "/partners" },
 ];
 
 export default function MembersPage() {
+  const { t } = useLanguage();
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white font-sans">
 
@@ -57,8 +62,8 @@ export default function MembersPage() {
         </Link>
 
         <ul className="flex items-center gap-9 list-none">
-          {navLinks.map(({ label, href, active }) => (
-            <li key={label}>
+          {navLinksKeys.map(({ labelKey, href, active }) => (
+            <li key={labelKey}>
               <Link
                 href={href}
                 className={`text-xs font-semibold tracking-[2px] uppercase transition-colors ${active
@@ -66,41 +71,44 @@ export default function MembersPage() {
                   : "text-white/60 hover:text-orange-400"
                   }`}
               >
-                {label}
+                {t(labelKey)}
               </Link>
             </li>
           ))}
         </ul>
 
-        <a
-          href="https://discord.gg/ZejDZvATv"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs font-semibold tracking-[2px] uppercase border border-white/35 px-5 py-2 rounded-md hover:bg-white hover:text-black transition-all"
-        >
-          Discord
-        </a>
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher />
+          <a
+            href="https://discord.gg/ZejDZvATv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-semibold tracking-[2px] uppercase border border-white/35 px-5 py-2 rounded-md hover:bg-white hover:text-black transition-all"
+          >
+            {t('discord')}
+          </a>
+        </div>
       </nav>
 
       {/* ページヘッダー */}
       <div className="bg-[#0d0d0d] border-b border-white/[0.06]">
         <div className="max-w-5xl mx-auto px-12 py-14">
           <p className="text-[11px] font-bold tracking-[4px] uppercase text-orange-500 mb-3">
-            Our Team
+            {t('our-team')}
           </p>
           <h1 className="text-6xl font-black tracking-wider uppercase mb-2">
-            Members
+            {t('members-title')}
           </h1>
           <p className="text-sm text-white/45 font-light">
-            The drivers who keep Royal Jiyu Logistics moving.
+            {t('members-desc')}
           </p>
         </div>
       </div>
 
       {/* メンバー一覧 */}
       <div className="max-w-5xl mx-auto px-12 py-12 pb-24 space-y-14">
-        {ranks.map(({ label, color, bg, members }) => (
-          <section key={label}>
+        {ranks.map(({ labelKey, color, bg, members }) => (
+          <section key={labelKey}>
             {/* ランクラベル */}
             <div className="flex items-center gap-2 mb-5">
               <div
@@ -111,7 +119,7 @@ export default function MembersPage() {
                 className="text-[11px] font-bold tracking-[3px] uppercase"
                 style={{ color }}
               >
-                {label}
+                {t(labelKey)}
               </span>
             </div>
 
@@ -137,11 +145,11 @@ export default function MembersPage() {
                     className="text-[11px] font-semibold tracking-[2px] uppercase"
                     style={{ color }}
                   >
-                    {member.role}
+                    {t(member.roleKey)}
                   </div>
 
                   <div className="text-xs text-white/35 mt-2.5 font-light">
-                    Deliveries{" "}
+                    {t('deliveries')}{" "}
                     <span className="text-white/65 font-medium">
                       {member.deliveries ?? "—"}
                     </span>
@@ -151,7 +159,7 @@ export default function MembersPage() {
                     className="inline-block text-[10px] font-bold tracking-[2px] uppercase px-2 py-0.5 rounded mt-2"
                     style={{ background: bg, color }}
                   >
-                    {member.role}
+                    {t(member.roleKey)}
                   </div>
                 </div>
               ))}
@@ -163,7 +171,7 @@ export default function MembersPage() {
       {/* フッター */}
       <footer className="bg-black border-t border-white/[0.06] px-12 py-6 flex justify-between items-center text-xs text-white/30 tracking-wider">
         <span className="text-orange-500 font-black text-base tracking-widest">RJL</span>
-        <span>© 2026 Royal Jiyu Logistics · Freedom Across Asia</span>
+        <span>{t('footer')}</span>
       </footer>
     </main >
   );
