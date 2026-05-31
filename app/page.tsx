@@ -1,9 +1,25 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [lang, setLang] = useState<"en" | "ja">("en");
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+
+  // 複数の背景画像
+  const backgroundImages = [
+    "url('https://images.steamusercontent.com/ugc/11684572301905860205/C5B8D256A9FBB3948809681DB87FC839C965CC57/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false')",
+    "url('https://images.steamusercontent.com/ugc/9287020850455943368/5B215A9CCE6043AF547BDE26DA76C4F6D800C015/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false')",
+  ];
+
+  // 背景画像を自動的に変更
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBgIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 6000); // 6秒ごとに変更
+
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
 
   const t = {
     en: {
@@ -16,7 +32,7 @@ export default function Home() {
         { icon: "🚛", title: "Drive when you want. Join others when you feel like it.", desc: "No schedules, no pressure. Hop in whenever you're ready to roll." },
         { icon: "🤝", title: "A relaxed community where you always belong.", desc: "No matter where you are on the map, feel free to say \"I'm here right now\" or \"Anyone nearby want to join?\" We value casual and natural interaction between members." },
         { icon: "📋", title: "Enjoy TruckersMP in your own way.", desc: "You can enjoy TruckersMP in many different ways." },
-        { icon: "🌏", title: "Asia Focus", desc: "We are based around the Asian community" },
+        { icon: "🌏", title: "Asia Focus", desc: "We are based around the Asian community. we often play together at asian time." },
       ],
       ctaSub: "Join our Discord and take your first step.",
       applyNow: "Apply Now",
@@ -35,7 +51,7 @@ export default function Home() {
         { icon: "🚛", title: "行きたい時に走る。誰かと走りたい時に集まる。", desc: "スケジュールなし、プレッシャーなし。準備ができたらいつでも参加できます。" },
         { icon: "🤝", title: "いつでも居場所があるコミュニティ。", desc: "マップのどこを走っていても大丈夫。「今ここを走ってる！」「近い人、一緒に行こう！」そんなふうに自由に声をかけ合えます。" },
         { icon: "📋", title: "自分のスタイルで楽しむ。", desc: "のんびりドライブ、長距離配送、夜間走行、写真撮影など、様々な楽しみ方ができます。" },
-        { icon: "🌏", title: "アジア重視", desc: "アジアコミュニティを中心に活動しています。" },
+        { icon: "🌏", title: "アジア重視", desc: "アジアコミュニティを中心に活動しています。アジア時間に合わせてプレイします。" },
       ],
       ctaSub: "Discordに参加して最初の一歩を。",
       applyNow: "申請する",
@@ -53,7 +69,8 @@ export default function Home() {
       <section
         className="relative min-h-screen flex flex-col bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://media.discordapp.net/attachments/1501146798750699640/1504795697990598766/ChatGPT_Image_May_15_2026_04_25_07_PM.png?ex=6a0849b4&is=6a06f834&hm=b1ca21e5cbd858de7094370c7c3bb7e311b060bebcf555bce063794f3928057f&=&format=webp&quality=lossless&width=912&height=513')",
+          backgroundImage: backgroundImages[currentBgIndex],
+          transition: "background-image 1.5s ease-in-out",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/85" />
@@ -140,3 +157,7 @@ export default function Home() {
     </main>
   );
 }
+//npm run build
+//git add .
+//git commit -m "update"
+//git push
