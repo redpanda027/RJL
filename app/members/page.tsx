@@ -36,7 +36,7 @@ const ranks = [
     color: "rgba(255,255,255,0.4)",
     bg: "rgba(255,255,255,0.07)",
     members: [
-      { initials: "RC", name: "Recruit1", roleKey: "recruit", deliveries: 5 },
+      { initials: "RC", name: "NO RECRUITS", roleKey: "/", deliveries: 0 },
     ],
   },
 ];

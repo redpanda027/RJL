@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [lang, setLang] = useState<"en" | "ja">("en");
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 複数の背景画像
   const backgroundImages = [
@@ -74,9 +75,11 @@ export default function Home() {
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/85" />
-        <nav className="relative z-10 flex items-center justify-between px-12 py-6 border-b border-white/10 backdrop-blur-sm">
-          <a href="#" className="text-orange-500 font-black text-xl tracking-[4px] uppercase">RJL</a>
-          <ul className="flex items-center gap-9 list-none">
+        <nav className="relative z-20 flex items-center justify-between px-4 sm:px-8 lg:px-12 py-4 sm:py-6 border-b border-white/10 backdrop-blur-sm">
+          <a href="#" className="text-orange-500 font-black text-lg sm:text-xl tracking-[4px] uppercase">RJL</a>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-6 lg:gap-9 list-none">
             {t.nav.map((label, i) => (
               <li key={label}>
                 <Link href={navHrefs[i]} className={`text-xs font-semibold tracking-[2px] uppercase transition-colors ${i === 0 ? "text-orange-500 border-b border-orange-500 pb-0.5" : "text-white/70 hover:text-orange-400"}`}>
@@ -85,7 +88,9 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <div className="flex items-center gap-3">
+
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={() => setLang(lang === "en" ? "ja" : "en")}
               className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
@@ -96,63 +101,102 @@ export default function Home() {
               Discord
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden flex flex-col gap-1.5 z-20"
+          >
+            <span className={`w-6 h-0.5 bg-white transition-all ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+            <span className={`w-6 h-0.5 bg-white transition-all ${mobileMenuOpen ? "opacity-0" : ""}`}></span>
+            <span className={`w-6 h-0.5 bg-white transition-all ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+          </button>
         </nav>
-        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
-          <div className="text-xs font-semibold tracking-[3px] uppercase text-orange-500 border border-orange-500/40 bg-orange-500/10 px-4 py-1.5 rounded-full mb-6">
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 right-0 z-10 bg-black/95 backdrop-blur-sm border-b border-white/10">
+            <ul className="flex flex-col list-none py-4">
+              {t.nav.map((label, i) => (
+                <li key={label}>
+                  <Link href={navHrefs[i]} onClick={() => setMobileMenuOpen(false)} className={`block px-6 py-3 text-sm font-semibold tracking-[2px] uppercase transition-colors ${i === 0 ? "text-orange-500 bg-orange-500/10" : "text-white/70 hover:text-orange-400 hover:bg-white/5"}`}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col gap-2 px-4 py-4 border-t border-white/10">
+              <button
+                onClick={() => {
+                  setLang(lang === "en" ? "ja" : "en");
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
+              >
+                {lang === "en" ? "日本語" : "ENGLISH"}
+              </button>
+              <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all text-center">
+                Discord
+              </a>
+            </div>
+          </div>
+        )}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 py-12 sm:py-0">
+          <div className="text-xs font-semibold tracking-[3px] uppercase text-orange-500 border border-orange-500/40 bg-orange-500/10 px-4 py-1.5 rounded-full mb-4 sm:mb-6">
             {t.badge}
           </div>
-          <h1 className="text-[clamp(56px,10vw,110px)] font-black leading-none tracking-wider uppercase drop-shadow-2xl mb-5">
+          <h1 className="text-[clamp(36px,8vw,110px)] font-black leading-none tracking-wider uppercase drop-shadow-2xl mb-3 sm:mb-5">
             Royal <span className="text-orange-500">Jiyu</span><br />Logistics
           </h1>
-          <p className="text-lg font-light tracking-[5px] uppercase text-white/55 mb-12">{t.subtitle}</p>
-          <div className="flex gap-4 flex-wrap justify-center">
-            <a href="https://truckersmp.com/vtc/89349" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold tracking-[2px] uppercase px-9 py-3.5 rounded-md shadow-[0_0_32px_rgba(249,115,22,0.3)] transition-all hover:-translate-y-0.5">
+          <p className="text-sm sm:text-base lg:text-lg font-light tracking-[3px] sm:tracking-[5px] uppercase text-white/55 mb-8 sm:mb-12">{t.subtitle}</p>
+          <div className="flex gap-3 sm:gap-4 flex-wrap justify-center w-full sm:w-auto">
+            <a href="https://truckersmp.com/vtc/89349" target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none bg-orange-500 hover:bg-orange-600 text-white text-xs sm:text-sm font-bold tracking-[2px] uppercase px-4 sm:px-9 py-3 sm:py-3.5 rounded-md shadow-[0_0_32px_rgba(249,115,22,0.3)] transition-all hover:-translate-y-0.5 min-w-[120px] sm:min-w-auto">
               {t.joinUs}
             </a>
-            <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-white text-sm font-bold tracking-[2px] uppercase border border-white/35 px-9 py-3.5 rounded-md backdrop-blur-sm hover:bg-white/10 transition-all hover:-translate-y-0.5">
+            <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none text-white text-xs sm:text-sm font-bold tracking-[2px] uppercase border border-white/35 px-4 sm:px-9 py-3 sm:py-3.5 rounded-md backdrop-blur-sm hover:bg-white/10 transition-all hover:-translate-y-0.5 min-w-[120px] sm:min-w-auto">
               Discord
             </a>
           </div>
         </div>
-        <div className="relative z-10 flex justify-center border-t border-white/10 backdrop-blur-md bg-black/50">
+        <div className="relative z-10 flex flex-col sm:flex-row justify-center border-t border-white/10 backdrop-blur-md bg-black/50">
           {["2+", "0+", "Asia", "24/7"].map((num, i) => (
-            <div key={i} className={`flex-1 max-w-[200px] text-center py-7 px-6 ${i < 3 ? "border-r border-white/10" : ""}`}>
-              <div className="text-4xl font-black tracking-wider text-orange-500">{num}</div>
-              <div className="text-[11px] font-semibold tracking-[2px] uppercase text-white/45 mt-1">{t.stats[i]}</div>
+            <div key={i} className={`flex-1 text-center py-5 sm:py-7 px-4 sm:px-6 ${i < 3 ? "border-b sm:border-b-0 sm:border-r border-white/10" : ""}`}>
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-wider text-orange-500">{num}</div>
+              <div className="text-[10px] sm:text-[11px] font-semibold tracking-[1px] sm:tracking-[2px] uppercase text-white/45 mt-1">{t.stats[i]}</div>
             </div>
           ))}
         </div>
       </section>
       <section className="bg-[#0d0d0d]">
-        <div className="max-w-5xl mx-auto px-12 py-20">
-          <p className="text-[11px] font-bold tracking-[4px] uppercase text-orange-500 mb-3">{t.aboutLabel}</p>
-          <h2 className="text-5xl font-black tracking-wider uppercase mb-12">{t.whyJoin}</h2>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-16 lg:py-20">
+          <p className="text-[10px] sm:text-[11px] font-bold tracking-[3px] sm:tracking-[4px] uppercase text-orange-500 mb-3">{t.aboutLabel}</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-wider uppercase mb-8 sm:mb-12">{t.whyJoin}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-y divide-white/[0.06] border border-white/[0.06] rounded-lg overflow-hidden">
             {t.features.map(({ icon, title, desc }) => (
-              <div key={title} className="bg-[#0d0d0d] hover:bg-[#141414] transition-colors p-8">
-                <div className="text-3xl mb-4">{icon}</div>
-                <h3 className="text-xl font-black tracking-wide uppercase mb-2">{title}</h3>
-                <p className="text-sm leading-relaxed text-white/45">{desc}</p>
+              <div key={title} className="bg-[#0d0d0d] hover:bg-[#141414] transition-colors p-4 sm:p-6 lg:p-8">
+                <div className="text-2xl sm:text-3xl mb-3 sm:mb-4">{icon}</div>
+                <h3 className="text-base sm:text-lg lg:text-xl font-black tracking-wide uppercase mb-2">{title}</h3>
+                <p className="text-xs sm:text-sm leading-relaxed text-white/45">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <section className="bg-gradient-to-br from-[#1a0d00] to-[#0d0d0d] border-t border-orange-500/15 text-center px-12 py-20">
-        <h2 className="text-6xl font-black tracking-wider uppercase mb-4">Ready to <span className="text-orange-500">Roll?</span></h2>
-        <p className="text-base text-white/50 tracking-wider mb-9">{t.ctaSub}</p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <a href="https://truckersmp.com/vtc/89349" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold tracking-[2px] uppercase px-9 py-3.5 rounded-md shadow-[0_0_32px_rgba(249,115,22,0.3)] transition-all hover:-translate-y-0.5">
+      <section className="bg-gradient-to-br from-[#1a0d00] to-[#0d0d0d] border-t border-orange-500/15 text-center px-4 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
+        <h2 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-wider uppercase mb-3 sm:mb-4">Ready to <span className="text-orange-500">Roll?</span></h2>
+        <p className="text-xs sm:text-sm lg:text-base text-white/50 tracking-wider mb-6 sm:mb-9">{t.ctaSub}</p>
+        <div className="flex gap-3 sm:gap-4 justify-center flex-wrap">
+          <a href="https://truckersmp.com/vtc/89349" target="_blank" rel="noopener noreferrer" className="bg-orange-500 hover:bg-orange-600 text-white text-xs sm:text-sm font-bold tracking-[2px] uppercase px-6 sm:px-9 py-3 sm:py-3.5 rounded-md shadow-[0_0_32px_rgba(249,115,22,0.3)] transition-all hover:-translate-y-0.5 min-w-[120px] text-center">
             {t.applyNow}
           </a>
-          <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-white text-sm font-bold tracking-[2px] uppercase border border-white/35 px-9 py-3.5 rounded-md hover:bg-white/10 transition-all hover:-translate-y-0.5">
+          <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-white text-xs sm:text-sm font-bold tracking-[2px] uppercase border border-white/35 px-6 sm:px-9 py-3 sm:py-3.5 rounded-md hover:bg-white/10 transition-all hover:-translate-y-0.5 min-w-[120px] text-center">
             {t.joinDiscord}
           </a>
         </div>
       </section>
-      <footer className="bg-black border-t border-white/[0.06] px-12 py-6 flex justify-between items-center text-xs text-white/30 tracking-wider">
+      <footer className="bg-black border-t border-white/[0.06] px-4 sm:px-8 lg:px-12 py-4 sm:py-6 flex flex-col sm:flex-row gap-3 sm:gap-0 justify-between items-center sm:items-center text-xs text-white/30 tracking-wider">
         <span className="text-orange-500 font-black text-base tracking-widest">RJL</span>
-        <span>{t.footer}</span>
+        <span className="text-center sm:text-right">{t.footer}</span>
       </footer>
     </main>
   );
