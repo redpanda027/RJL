@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [lang, setLang] = useState<"en" | "ja">("en");
+  const [lang, setLang] = useState<"en" | "ja" | "hi">("en");
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,9 +61,30 @@ export default function Home() {
       stats: ["アクティブドライバー", "配送数", "エリア", "コミュニティ"],
       nav: ["ホーム", "私たちについて", "メンバー", "イベント"],
     },
+    hi: {
+      badge: "वर्चुअल ट्रकिंग कंपनी · ETS2",
+      subtitle: "कोई दबाव नहीं। कोई सीमा नहीं। कभी भी साथ चलें।",
+      joinUs: "जुड़ें",
+      aboutLabel: "हमारे बारे में",
+      whyJoin: "RJL में क्यों शामिल हों?",
+      features: [
+        { icon: "🚛", title: "जब चाहो चलाओ। जब मन करे दूसरों के साथ जुड़ो।", desc: "कोई शेड्यूल नहीं, कोई दबाव नहीं। जब भी तैयार हों, आ जाइए।" },
+        { icon: "🤝", title: "एक शांत समुदाय जहाँ आप हमेशा अपनेपन का एहसास करें।", desc: "मैप पर जहाँ भी हों, बेझिझक कहें \"मैं अभी यहाँ चला रहा हूँ\" या \"पास में कोई है जो जुड़ना चाहे?\" हम सदस्यों के बीच स्वाभाविक बातचीत को महत्व देते हैं।" },
+        { icon: "📋", title: "अपने तरीके से TruckersMP का आनंद लें।", desc: "आप TruckersMP का आनंद कई अलग-अलग तरीकों से ले सकते हैं।" },
+        { icon: "🌏", title: "एशिया फोकस", desc: "हम एशियाई समुदाय पर केंद्रित हैं। हम अक्सर एशियाई समय पर एक साथ खेलते हैं।" },
+      ],
+      ctaSub: "हमारे Discord से जुड़ें और अपना पहला कदम उठाएँ।",
+      applyNow: "आवेदन करें",
+      joinDiscord: "Discord से जुड़ें",
+      footer: "© 2026 Royal Jiyu Logistics · पूरे एशिया में आज़ादी",
+      stats: ["सक्रिय ड्राइवर", "डिलीवरी", "कवरेज", "समुदाय"],
+      nav: ["होम", "हमारे बारे में", "सदस्य", "ईवेंट"],
+    },
   }[lang];
 
   const navHrefs = ["/", "/about", "/members", "/events"];
+
+  const langButtonLabel = lang === "en" ? "日本語" : lang === "ja" ? "हिन्दी" : "ENGLISH";
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white font-sans">
@@ -92,10 +113,10 @@ export default function Home() {
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <button
-              onClick={() => setLang(lang === "en" ? "ja" : "en")}
+              onClick={() => setLang(lang === "en" ? "ja" : lang === "ja" ? "hi" : "en")}
               className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
             >
-              {lang === "en" ? "日本語" : "ENGLISH"}
+              {langButtonLabel}
             </button>
             <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-5 py-2 rounded-md hover:bg-white hover:text-black transition-all">
               Discord
@@ -128,12 +149,12 @@ export default function Home() {
             <div className="flex flex-col gap-2 px-4 py-4 border-t border-white/10">
               <button
                 onClick={() => {
-                  setLang(lang === "en" ? "ja" : "en");
+                  setLang(lang === "en" ? "ja" : lang === "ja" ? "hi" : "en");
                   setMobileMenuOpen(false);
                 }}
                 className="w-full text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
               >
-                {lang === "en" ? "日本語" : "ENGLISH"}
+                {langButtonLabel}
               </button>
               <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all text-center">
                 Discord

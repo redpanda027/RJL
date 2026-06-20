@@ -9,6 +9,7 @@ const upcomingEvents = [
     date: "2026-09-26",
     titleEn: "Autumn Convoy 2026",
     titleJa: "秋のコンボイ 2026",
+    titleHi: "शरद कॉन्वॉय 2026",
     route: "Amsterdam→Liege",
     server: "[JAPAN]ENJOYTRUCKERS - AUTUMN",
     slots: 10,
@@ -23,6 +24,7 @@ const pastEvents = [
     date: "2001-01-01",
     titleEn: "new vtc test drive",
     titleJa: "新VTC テストドライブ",
+    titleHi: "नए VTC का टेस्ट ड्राइव",
     route: "Amsterdam→Liege",
     server: "tmp Simulation 2",
     slots: 10,
@@ -40,26 +42,28 @@ function EventCard({
     date: string;
     titleEn: string;
     titleJa: string;
+    titleHi: string;
     route: string;
     server: string;
     slots: number;
     filled: number;
     status: string;
   };
-  lang: "en" | "ja";
+  lang: "en" | "ja" | "hi";
 }) {
   const t = {
     en: { finished: "Finished", full: "Full", open: "Open", members: "members" },
     ja: { finished: "終了", full: "満席", open: "参加可", members: "人" },
+    hi: { finished: "समाप्त", full: "भरा हुआ", open: "खुला", members: "सदस्य" },
   }[lang];
 
   const isPast = event.status === "past";
   const isFull = event.filled >= event.slots;
   const fillPercent = Math.round((event.filled / event.slots) * 100);
-  const title = lang === "en" ? event.titleEn : event.titleJa;
+  const title = lang === "en" ? event.titleEn : lang === "ja" ? event.titleJa : event.titleHi;
 
   const dateObj = new Date(event.date);
-  const month = dateObj.toLocaleString(lang === "en" ? "en-US" : "ja-JP", { month: "short" }).toUpperCase();
+  const month = dateObj.toLocaleString(lang === "en" ? "en-US" : lang === "ja" ? "ja-JP" : "hi-IN", { month: "short" }).toUpperCase();
   const day = dateObj.getDate();
 
   return (
@@ -117,7 +121,7 @@ function EventCard({
 }
 
 export default function EventsPage() {
-  const [lang, setLang] = useState<"en" | "ja">("en");
+  const [lang, setLang] = useState<"en" | "ja" | "hi">("en");
 
   const t = {
     en: {
@@ -146,7 +150,22 @@ export default function EventsPage() {
       pastEvents: "過去のイベント",
       footer: "© 2026 Royal Jiyu Logistics · 自由はアジア中に。",
     },
+    hi: {
+      home: "होम",
+      about: "हमारे बारे में",
+      members: "सदस्य",
+      events: "ईवेंट",
+      discord: "डिस्कॉर्ड",
+      convoyEvents: "कॉन्वॉय ईवेंट",
+      eventsTitle: "ईवेंट",
+      eventsDesc: "पिछले और आगामी कॉन्वॉय ईवेंट की सूची।",
+      upcoming: "आगामी",
+      pastEvents: "पिछले ईवेंट",
+      footer: "© 2026 Royal Jiyu Logistics · पूरे एशिया में आज़ादी",
+    },
   }[lang];
+
+  const langButtonLabel = lang === "en" ? "日本語" : lang === "ja" ? "हिन्दी" : "ENGLISH";
 
   const navLinks = [
     { label: t.home, href: "/" },
@@ -182,10 +201,10 @@ export default function EventsPage() {
 
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setLang(lang === "en" ? "ja" : "en")}
+            onClick={() => setLang(lang === "en" ? "ja" : lang === "ja" ? "hi" : "en")}
             className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
           >
-            {lang === "en" ? "日本語" : "ENGLISH"}
+            {langButtonLabel}
           </button>
           <a
             href="https://discord.gg/ZejDZvATv"

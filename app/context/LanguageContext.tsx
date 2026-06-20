@@ -2,11 +2,11 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type Language = 'en' | 'ja';
+type Language = 'en' | 'ja' | 'hi' | 'ko';
 
 interface LanguageContextType {
   language: Language;
-  toggleLanguage: () => void;
+  setLanguage: (lang: Language) => void;
   t: (key: string) => string;
 }
 
@@ -14,10 +14,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguage] = useState<Language>('en');
-
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'en' ? 'ja' : 'en'));
-  };
 
   const t = (key: string): string => {
     const translations: Record<Language, Record<string, string>> = {
@@ -65,13 +61,57 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
         'deliveries': '配達回数',
         'footer': '© 2026 Royal Jiyu Logistics · 自由はアジア中に。',
       },
+      hi: {
+        'home': 'होम',
+        'members': 'सदस्य',
+        'events': 'ईवेंट',
+        'about': 'हमारे बारे में',
+        'partners': 'पार्टनर',
+        'discord': 'डिस्कॉर्ड',
+        'our-team': 'हमारी टीम',
+        'members-title': 'सदस्य',
+        'members-desc': 'वे ड्राइवर जो Royal Jiyu Logistics को चलाते रहते हैं।',
+        'administration': 'प्रशासन',
+        'staff': 'स्टाफ़',
+        'drivers': 'ड्राइवर',
+        'chats': 'चैट',
+        'owner': 'मालिक',
+        'co-owner': 'सह-मालिक',
+        'senior-driver': 'सीनियर ड्राइवर',
+        'driver': 'ड्राइवर',
+        'recruit': 'रिक्रूट',
+        'deliveries': 'डिलीवरी',
+        'footer': '© 2026 Royal Jiyu Logistics · पूरे एशिया में आज़ादी',
+      },
+      ko: {
+        'home': '홈',
+        'members': '멤버',
+        'events': '이벤트',
+        'about': '소개',
+        'partners': '파트너',
+        'discord': '디스코드',
+        'our-team': '우리 팀',
+        'members-title': '멤버',
+        'members-desc': 'Royal Jiyu Logistics를 움직이는 드라이버들입니다.',
+        'administration': '관리진',
+        'staff': '스태프',
+        'drivers': '드라이버',
+        'chats': '채팅',
+        'owner': '소유주',
+        'co-owner': '공동 소유주',
+        'senior-driver': '시니어 드라이버',
+        'driver': '드라이버',
+        'recruit': '리크루트',
+        'deliveries': '배송',
+        'footer': '© 2026 Royal Jiyu Logistics · 아시아 전역의 자유',
+      },
     };
 
     return translations[language][key] || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

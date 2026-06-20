@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function AboutUs() {
-    const [lang, setLang] = useState<"en" | "ja">("en");
+    const [lang, setLang] = useState<"en" | "ja" | "hi">("en");
 
     const t = {
         en: {
@@ -88,6 +88,54 @@ export default function AboutUs() {
             joinDiscord: "Discordに参加",
 
             footer: "© 2026 Royal Jiyū Logistics · 自由に、気軽に、一緒に。"
+        },
+        hi: {
+            home: "होम",
+            about: "हमारे बारे में",
+            members: "सदस्य",
+            events: "ईवेंट",
+            discord: "डिस्कॉर्ड",
+
+            whoWeAre: "हम कौन हैं",
+            aboutTitle: "हमारे बारे में",
+
+            welcomeTitle: "Royal Jiyū Logistics में आपका स्वागत है।",
+
+            intro: "हम एक TruckersMP VTC हैं जो मुख्य रूप से एशियाई समुदाय पर केंद्रित है, जो उन ड्राइवरों के लिए बनाया गया है जो एक आरामदायक, मैत्रीपूर्ण और दबाव-मुक्त वातावरण में सड़क का आनंद लेना चाहते हैं। हमारा लक्ष्य सरल है: एक साथ आज़ादी और सहजता से TruckersMP का आनंद लेना।",
+
+            convoyInfo: "Royal Jiyū Logistics में, हम मानते हैं कि TruckersMP को हमेशा प्रतिस्पर्धी या अत्यधिक गंभीर होने की आवश्यकता नहीं है। कभी-कभी सबसे अच्छे पल शांत रात की ड्राइव, सड़क पर यादृच्छिक बातचीत, या अचानक अन्य ड्राइवरों के साथ मैप पार करने का निर्णय लेने से आते हैं। हम एक ऐसा समुदाय बनाना चाहते हैं जहाँ लोग बिना किसी दबाव के उन पलों का आनंद ले सकें।",
+
+            motto: "जब चाहो चलाओ। जब मन करे दूसरों के साथ जुड़ो।",
+
+            communityDesc: "हम एक ऐसा शांत और स्वाभाविक समुदाय बनाना चाहते हैं। मैप पर आप जहाँ भी ड्राइव कर रहे हों, आप हमेशा यह कहने के लिए स्वागत हैं:",
+            convoyInfo2: "हम कभी-कभी कॉन्वॉय इवेंट और सामुदायिक गतिविधियों का आयोजन करते हैं, लेकिन भागीदारी हमेशा वैकल्पिक होती है। हर इवेंट में शामिल होने, लगातार सक्रिय रहने या सख्त उपस्थिति नियमों का पालन करने का कोई दबाव नहीं है। हर किसी की अपनी गति होती है, और हम उसका सम्मान करते हैं।",
+
+            quote1: "\"मैं अभी यहाँ चला रहा हूँ।\"",
+            quote2: "\"पास में कोई है जो जुड़ना चाहे?\"",
+
+            interaction: "हम सदस्यों के बीच स्वाभाविक बातचीत को महत्व देते हैं।",
+
+            waysTitle: "आप TruckersMP का आनंद कई अलग-अलग तरीकों से ले सकते हैं:",
+            ways: [
+                "सामान्य ड्राइविंग",
+                "लंबी दूरी की यात्राएँ",
+                "रात की ड्राइव",
+                "फोटो सेशन",
+                "बातचीत करते हुए आराम से ड्राइव",
+                "दृश्यों का आनंद लेते हुए क्रूज़िंग",
+                "अकेले मनमानी ड्राइव",
+                "यथार्थवादी ड्राइविंग"
+            ],
+
+            closing: "चाहे आप शुरुआती हों, अनुभवी ड्राइवर हों, या अकेले खेलने वाले हों, यहाँ सभी का स्वागत है। आज़ादी से जुड़ें, एक साथ चलाएँ, और बिना दबाव के सड़क का आनंद लें।",
+
+            readyTitle: "चलने के लिए तैयार?",
+
+            ctaSub: "हमारे Discord से जुड़ें और अपना पहला कदम उठाएँ।",
+
+            joinDiscord: "Discord से जुड़ें",
+
+            footer: "© 2026 Royal Jiyū Logistics · आज़ादी से, सहजता से, एक साथ।"
         }
     }[lang];
 
@@ -97,6 +145,8 @@ export default function AboutUs() {
         { label: t.members, href: "/members" },
         { label: t.events, href: "/events" },
     ];
+
+    const langButtonLabel = lang === "en" ? "日本語" : lang === "ja" ? "हिन्दी" : "ENGLISH";
 
     return (
         <main className="min-h-screen bg-[#0a0a0a] text-white font-sans">
@@ -120,10 +170,10 @@ export default function AboutUs() {
                 </ul>
                 <div className="flex items-center gap-3">
                     <button
-                        onClick={() => setLang(lang === "en" ? "ja" : "en")}
+                        onClick={() => setLang(lang === "en" ? "ja" : lang === "ja" ? "hi" : "en")}
                         className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-3 py-2 rounded-md hover:bg-white hover:text-black transition-all"
                     >
-                        {lang === "en" ? "日本語" : "ENGLISH"}
+                        {langButtonLabel}
                     </button>
                     <a href="https://discord.gg/ZejDZvATv" target="_blank" rel="noopener noreferrer"
                         className="text-xs font-semibold tracking-[2px] uppercase border border-white/40 px-5 py-2 rounded-md hover:bg-white hover:text-black transition-all">
