@@ -28,7 +28,7 @@ const ranks = [
     color: "#60a5fa",
     bg: "rgba(96,165,250,0.12)",
     members: [
-      { initials: "FK", name: "Arigasaki0", roleKey: "driver", deliveries: 0 },
+      { initials: "/", name: "/", roleKey: "driver", deliveries: 0 },
     ],
   },
   {
